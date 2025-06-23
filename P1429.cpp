@@ -34,7 +34,6 @@ double find_min_dist(const std::vector<Point> &point_v,int l_ind,int r_ind){
         }
         return min_dist;
     }
-    else {
     int mid = (r_ind + l_ind)/2;
     double mid_x = point_v[mid].x;
     double l_dist = find_min_dist(point_v,l_ind,mid);
@@ -47,8 +46,8 @@ double find_min_dist(const std::vector<Point> &point_v,int l_ind,int r_ind){
         }
     }
     std::sort(strip_points.begin(), strip_points.end(),cmp_y);
-    for(int i=0;i<strip_points.size();i++){
-        for(int j=i+1;j<strip_points.size();j++){
+    for(size_t i=0;i<strip_points.size();i++){
+        for(size_t j=i+1;j<strip_points.size();j++){
             if (pow(strip_points[j].y - strip_points[i].y, 2) >= min_dist) {
             break;
         }
@@ -57,7 +56,6 @@ double find_min_dist(const std::vector<Point> &point_v,int l_ind,int r_ind){
         }
     }
     return min_dist;
-    }
 }
 
 int main(){
