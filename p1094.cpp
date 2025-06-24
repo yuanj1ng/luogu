@@ -27,6 +27,7 @@ int main(){
             l++,r--;
             if(l==r){
                 ans++;
+                break;
             }
         }
     }
