@@ -19,13 +19,12 @@ int main(){
     bool con = true;//false代表l++,true代表 r--
     long long ans = 1LL * h_v[l] * h_v[l] ;
     while(l!=r){
+        ans += 1LL * (h_v[l] - h_v[r]) * (h_v[l] - h_v[r]);
         if (con){
-            ans += 1LL * (h_v[l] - h_v[r]) * (h_v[l] - h_v[r]);
             l++;
             con = false;
         } 
         else {
-            ans += 1LL * (h_v[l] - h_v[r]) * (h_v[l] - h_v[r]);
             r--;
             con = true;
         }
