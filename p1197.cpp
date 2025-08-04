@@ -1,10 +1,6 @@
 #include <iostream>
 #include <vector>
 
-struct Pair{
-    int a;
-    int b;
-};
 
 class Union_find_set{
     private:
@@ -53,12 +49,12 @@ class Union_find_set{
 int main(){
     int n, m, k;
     std::cin >> n >> m;
-    std::vector<Pair> arr(m);
+    std::vector<std::vector<int>> graph(n);
     int a, b;
     for(size_t i = 0; i < m; i++){
-        Pair pair;
-        std::cin >> pair.a >> pair.b ;
-        arr[i] = pair;
+        std::cin >> a >> b ;
+        graph[a].push_back(b);
+        graph[b].push_back(a);
     }
 
     std::cin >> k;
@@ -72,21 +68,30 @@ int main(){
     }
     std::vector<int> ans(k+1);
     Union_find_set planet(n);
-    for(int j = k; j >=0; j--){
-        if(j < k){
-            is_destory[destory_planet[j]] = false;
-        }
-        for(size_t i = 0; i < m; i++){
-            a = arr[i].a;
-            b = arr[i].b;
-            //如果ab都没被摧毁
-            if(is_destory[a] != true && is_destory[b] != true){
-                planet.union_merge(a, b);
+    //这是最后输出的状态
+    for(int i = 0; i < n; i++){
+        if(is_destory[i] == false){
+            for(size_t j = 0; j < graph[i].size(); j++){
+                if(is_destory[graph[i][j]] == false){
+                    planet.union_merge(i, graph[i][j]);
+                }
             }
         }
-        ans[j] = planet.get_union_nums() - j;
     }
-    for(int i = k; i>=0; i--){
+    ans[k] = planet.get_union_nums() - k;
+    //一次次倒序回去
+    for(size_t i = 0; i < k; i++){
+        int remaining_destroyed = k - 1 - i;
+        int current_planet = destory_planet[k-i-1];
+        is_destory[current_planet] = false;
+        for(size_t j = 0; j < graph[current_planet].size(); j++){
+                if(is_destory[graph[current_planet][j]] == false){
+                    planet.union_merge(current_planet, graph[current_planet][j]);
+                }
+        }
+        ans[k-i-1] = planet.get_union_nums() - remaining_destroyed;
+    }
+    for(int i = 0; i <= k; i++){
         std::cout << ans[i] << std::endl;
     }
     return 0;
