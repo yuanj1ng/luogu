@@ -85,7 +85,6 @@ void dfs(std::string &current_str, int index, int &match_num, const std::string 
             for(int i=0; i<10;i++){
                 current_str[index] = i + '0';
                 dfs(current_str, index-1, match_num, original_str, is_prime_memo, is_prime_init);
-                current_str[index] = '-'; 
             }
         }else {
             current_str[index] = original_str[index]; 
