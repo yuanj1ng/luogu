@@ -1,12 +1,12 @@
 #include <iostream>
 #include <algorithm>
-
+#include <vector>
 
 int main(){
     int m, s, t;
     std::cin >> m >> s >> t;
     int runner = 0, caster = 0, dp[t+1];
-    dp[0] = 0;
+    std::vector<int> dp(t+1,0);
     for(int i = 1; i <= t; i++){
         runner = dp[i-1] + 17;
         if(m >= 10){
