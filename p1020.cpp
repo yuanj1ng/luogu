@@ -9,13 +9,13 @@ int main(){
     std::getline(std::cin, line);
     std::stringstream ss(line);
     int key;
-    while(ss>> key){
+    while(ss >> key){
         h.push_back(key);
     }
     int len = h.size();
     std::vector<int> dp1(len, 1);
     std::vector<int> dp2(len, 1);
-    int result1 = 1, result2 = 1;
+    int result1 = 0, result2 = 0;
     for(int i = 0; i < len; i++){
         for(int j = 0; j < i; j++){
             if(h[i] <= h[j]){
