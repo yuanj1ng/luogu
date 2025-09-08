@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 
+
 int main(){
     int m, s, t;
     std::cin >> m >> s >> t;
